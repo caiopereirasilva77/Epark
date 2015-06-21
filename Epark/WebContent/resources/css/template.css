@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+
+#topo {
+	background-color: black;
+	color: white;
+	text-align: center;
+	padding: 5px;
+}
+
+#menu {
+	line-height: 30px;
+	background-color: #eeeeee;
+	height: 100%;
+	width: 15%;
+	float: left;
+	padding: 5px;
+}
+
+#conteudo {
+	width: 75%;
+	float: left;
+	padding: 10px;
+	height: 100%;
+}
+
+#rodape {
+	background-color: black;
+	color: white;
+	clear: both;
+	text-align: center;
+	padding: 5px;
+}

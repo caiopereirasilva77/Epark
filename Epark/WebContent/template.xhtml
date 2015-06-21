@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Epark</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="template.css" />
+</h:head>
+
+<h:body>
+
+	<div id="topo">
+		<h1>Sistema Estacionamento</h1>
+		<ui:include src="menu.xhtml" />
+	</div>
+
+	<div id="menu">
+		
+	</div>
+
+	<div id="conteudo">
+		<ui:insert name="conteudo">Conteúdo</ui:insert>
+	</div>
+
+	<div id="rodape">Copyright © UC de Programação Web</div>
+</h:body>
+
+</html>

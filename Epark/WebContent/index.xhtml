@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<h:messages />
+		<h:panelGrid columns="3">
+			<h:outputText value="Login: " />
+			<h:inputText value="#{autenticacaoMB.login}" id="inLogin"
+				required="true" requiredMessage="Obigatório!" />
+			<h:message for="inLogin" />
+			<h:outputText value="Senha: " />
+			<h:inputSecret value="#{autenticacaoMB.senha}" id="inSenha"
+				required="true" requiredMessage="Obigatório!" />
+			<h:message for="inSenha" />
+			<h:commandButton styleClass="btn" action="#{autenticacaoMB.logar}"
+				value="Entrar" />
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+</html>
