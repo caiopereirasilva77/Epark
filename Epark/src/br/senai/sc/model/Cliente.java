@@ -31,7 +31,6 @@ public class Cliente {
     private String cpf;
     private String placa;
     private String modelo;
-    private Integer cartaoPark;
     private String tipocliente;
 
     public Cliente(Integer pid){
@@ -42,7 +41,6 @@ public class Cliente {
             cpf=tCliente.getCpf();
             placa=tCliente.getPlaca();
             modelo=tCliente.getModelo();
-            cartaoPark=tCliente.getCartaoPark();
             tipocliente=tCliente.getTipocliente();            
         }
     }
@@ -56,7 +54,6 @@ public class Cliente {
             cpf=tCliente.getCpf();
             placa=tCliente.getPlaca();
             modelo=tCliente.getModelo();
-            cartaoPark=tCliente.getCartaoPark();
             tipocliente=tCliente.getTipocliente();            
         }
     }
@@ -123,15 +120,8 @@ public class Cliente {
         this.modelo = modelo;
     }
 
-    public Integer getCartaoPark() {
-        return cartaoPark;
-    }
 
-    public void setCartaopark(Integer cartaopark) {
-        this.cartaoPark = cartaoPark;
-    }
-    
-    public String toString() {
+	public String toString() {
         return nome + " - " + cpf;
         
         

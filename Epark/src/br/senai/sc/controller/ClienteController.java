@@ -48,11 +48,11 @@ public class ClienteController {
              
         }
         
-        ClienteDao.obterInstancia().inserir(cliente);
+        ClienteDao.obterInstancia().insere(cliente);
         
     }
     public List<Cliente> listarTodos(){
-        return ClienteDao.obterInstancia().listarTodos();
+        return ClienteDao.obterInstancia().buscarTodos();
     }
     
     public void alterar(Cliente cliente)throws Exception{
@@ -77,7 +77,7 @@ public class ClienteController {
              throw new Exception("Preencha a Placa do veículo");
              
         }
-        ClienteDao.obterInstancia().alterar(cliente);
+        ClienteDao.obterInstancia().atualizar(cliente);
         
         }
     

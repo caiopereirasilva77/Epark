@@ -26,45 +26,69 @@ public class ClienteMB {
 		cliente = new Cliente();
 		 clientes= new ArrayList<Cliente>();
 
-		 clientes = clienteDAO.listarTodos();
+		 clientes = clienteDAO.buscarTodos();
 
 	}
 
 	public String salvar(){
 		FacesContext context = FacesContext.getCurrentInstance();
-		if (cliente.getCpf().equals(confCpfCliente)&& cliente.getId() ==null){
+//		if (cliente.getCpf().equals(confCpfCliente)&& cliente.getId() ==null){
+//			
+//			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "cpf ja existe", ""));
+		
+		if (cliente.getNome().isEmpty()&& 
+			cliente.getCpf().isEmpty()&&
+			cliente.getPlaca()!=null&& 
+			cliente.getModelo()!=null&&
+			cliente.getTipocliente()!=null) {
 			
-			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "cpf ja existe", ""));
-			
-			if(cliente.getId() == null){
-				clienteDAO.inserir(cliente);
-				clientes = clienteDAO.listarTodos();
-				cliente = new Cliente();
-			}else{
-				clienteDAO.alterar(cliente);
-				clientes = clienteDAO.listarTodos();
+		cliente.setTipocliente("A");
+System.out.println("tipo cliente:" + cliente.getTipocliente());			
+		}
+		
+			if(cliente.getId() == null&& 
+			   cliente.getNome().isEmpty()&& 
+			   cliente.getCpf().isEmpty()&&
+			   cliente.getPlaca()!=null&& 
+			   cliente.getModelo()!=null&&
+			   cliente.getTipocliente()!=null){
+				cliente.setTipocliente("A");
+				System.out.println("tipo cliente:" + cliente.getTipocliente());		
+				clienteDAO.insere(cliente);
+				clientes = clienteDAO.buscarTodos();
 				cliente = new Cliente();
 			}
+			
+			if (cliente.getId()!=null) {
+				
+				clienteDAO.atualizar(cliente);
+				clientes = clienteDAO.buscarTodos();
+				cliente = new Cliente();
+				
+				
+			}
+				
+			
 			
 //		}else{
 //			clienteDAO.insere(cliente);
 //			clientes = clienteDAO.buscarTodos();
-			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", ""));
+//			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", ""));
 			
-		}
+		
 		return "";
 	}
 	
 	
-//	public String excluir(){
-//		ClienteDao dao = new ClienteDao();
-//		dao.excluir(cliente);
-//		clientes = dao.listarTodos();
-//		cliente = new Cliente();
-//		return"";
-//		
-//		
-//	}
+	public String excluir() throws Exception{
+		ClienteDao dao = new ClienteDao();
+		dao.excluir(cliente);
+		clientes = dao.buscarTodos();
+		cliente = new Cliente();
+		return"";
+		
+		
+	}
 
 	
 
@@ -87,9 +111,19 @@ public class ClienteMB {
 		return clientes;
 	}
 
-	public void setUsuarios(List<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
-	}	
+	}
+
+	public ClienteDao getClienteDAO() {
+		return clienteDAO;
+	}
+
+	public void setClienteDAO(ClienteDao clienteDAO) {
+		this.clienteDAO = clienteDAO;
+	}
+
+	
 	
 
 }

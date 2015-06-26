@@ -8,7 +8,7 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<h:messages />
-			<h:panelGrid cellpading="2" columns="4">
+			<h:panelGrid  columns="2">
 			
 				<h:outputText value="Nome:" />
 					<h:panelGroup>
@@ -27,21 +27,25 @@
 					<h:panelGroup>
 						<h:inputText id="inPlaca" value="#{clienteMB.cliente.placa}"
 						required="true" requiredMessage="Placa Obrigatória" />
-						<h:message for="inPlaca" />/>
+						<h:message for="inPlaca" />
 					</h:panelGroup>
 				
 				
 				<h:outputText value="MODELO:" />
 					<h:panelGroup>
-						<h:inputText id="inModelo" value="#{clienteMB.cliente.placa}"
-						required="true" requiredMessage="Placa Obrigatória" />
-						<h:message for="inPlaca" />/>
+						<h:inputText id="inModelo" value="#{clienteMB.cliente.modelo}"
+						required="true" requiredMessage="Modelo Obrigatório" />
+						<h:message for="inPlaca" />
 					</h:panelGroup>
-				
+				  
+			<h:outputLabel value="Tipo Cliente :  "/>
 				<h:selectOneRadio value="#{clienteMB.cliente.tipocliente}">
-   						<f:selectItem itemValue="A" itemLabel="Avulço" />
+				<br />
+				
+   						<f:selectItem itemValue="A"  cellpadding="4" itemLabel="Avulso" />
    						<f:selectItem itemValue="M" itemLabel="Mensalista" />	   			
-				</h:selectOneRadio>	   
+				</h:selectOneRadio>
+				   
 			
 
 				<h:commandButton value="Salvar" action="#{clienteMB.salvar}"
@@ -51,26 +55,46 @@
 
 			<br />
 
-			<p:dataTable value="#{clienteMB.clientes}" var="clis">
-				<p:column>#{clis.cartão}</p:column>
-				<p:column>#{clis.nome}</p:column>
-				<p:column>#{clis.cpf}</p:column>
-				<p:column>#{clis.placa}</p:column>
-				<p:column>#{clis.modelo}</p:column>
-				<p:column>#{clis.tipo}</p:column>
+			<p:dataTable value="#{clienteMB.clientes}" var="clis"
+				paginator="true" rowsPerPageTemplate="2,5,10">
 				
-					<h:commandButton value="Editar" action="#{clienteMB.salvar}"
-						styleClass="btn" process="@this" update="@form">
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					#{clis.nome}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">CPF</f:facet>
+					#{clis.cpf}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Placa</f:facet>
+					#{clis.placa}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Modelo</f:facet>
+					#{clis.modelo}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Tipo Cliente</f:facet>
+					#{clis.tipocliente}
+				</p:column>
+				
+				<p:column>
+					<p:commandButton value="Editar" styleClass="btn"  process="@this" update="@form">
 						<f:setPropertyActionListener value="#{clis}"
 							target="#{clienteMB.cliente}" />
-					</h:commandButton>
+					</p:commandButton>
 
-					<h:commandButton action="#{clienteMB.excluir}" value="Excluir"
-						styleClass="btn" process="@this" update="@form">
-					<f:setPropertyActionListener value="#{clis}"
+					<p:commandButton  value="Excluir" styleClass="btn" process="@this" update="@form">
+						<f:setPropertyActionListener value="#{clis}"
 							target="#{clienteMB.cliente}" />
-					</h:commandButton>
+					</p:commandButton>
 				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 	</ui:define>
