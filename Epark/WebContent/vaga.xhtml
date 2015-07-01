@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -27,9 +28,9 @@
 				
 				<h:outputText value="Valor (tipo):" />
 					<h:panelGroup>
-						<h:inputText id="inValor" value="#{vagaMB.vaga.tipoValor}"
+						<h:inputText id="inValorTipo" value="#{vagaMB.vaga.tipoValor}"
 						required="true" requiredMessage="..." />
-						<h:message for="inValor" />
+						<h:message for="inValorTipo" />
 					</h:panelGroup>
 				
 				
@@ -76,83 +77,4 @@
 			</p:dataTable>
 		</h:form>
 	</ui:define>
-=======
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
-
-	<ui:define name="conteudo">
-		<h:form id="formVaga">
-			<h2>Vagas</h2>
-			<p:messages />
-			<h:panelGrid cellpading="2" columns="4">
-			
-				<h:outputText value="Numero da vaga:" />
-					<h:panelGroup>
-						<h:inputText id="inNumeroVaga" value="#{vagaMB.vaga.numeroVaga}"/>
-					</h:panelGroup>
-
-
-				<h:outputText value="Tipo da vaga:" />
-					<h:panelGroup>
-						<h:inputText id="inTipoVaga" value="#{vagaMB.vaga.tipoVaga}"/>
-						<h:message for="inTipoVaga" />
-					</h:panelGroup>
-
-				
-				<h:outputText value="Valor (tipo):" />
-					<h:panelGroup>
-						<h:inputText id="inValor" value="#{vagaMB.vaga.tipoValor}"
-						required="true" requiredMessage="..." />
-						<h:message for="inValor" />
-					</h:panelGroup>
-				
-				
-				<h:outputText value="Valor:" />
-					<h:panelGroup>
-						<h:inputText id="inValor" value="#{vagaMB.vaga.valorUnit}"
-						required="true" requiredMessage="Valor Obrigatório" />
-						<h:message for="inValor" />
-					</h:panelGroup>
-				
-				<h:selectOneRadio value="#{vagaMB.vaga.status}">
-   						<f:selectItem itemValue="0" itemLabel="Livre" />
-   						<f:selectItem itemValue="1" itemLabel="Ocupada" />	   			
-				</h:selectOneRadio>	   
-			
-
-				<h:commandButton value="Salvar" action="#{vagaMB.salvar}"
-					styleClass="btn" process="@form" update="@form" />
-
-			</h:panelGrid>
-
-			<br />
-
-			<p:dataTable value="#{vagasMB.clientes}" var="vaga">
-				<p:column>#{vaga.id}</p:column>
-				<p:column>#{vaga.numeroVaga}</p:column>
-				<p:column>#{vaga.tipoVaga}</p:column>
-				<p:column>#{vaga.tipoValor}</p:column>
-				<p:column>#{vaga.valorUnit}</p:column>
-				<p:column>#{vaga.status}</p:column>
-				<p:column>
-					<h:commandButton value="Editar" action="#{vagaMB.salvar}"
-						styleClass="btn" process="@this" update="@form">
-						<f:setPropertyActionListener value="#{vga}"
-							target="#{vagaMB.vaga}" />
-					</h:commandButton>
-
-					<h:commandButton action="#{vagaMB.excluir}" value="Excluir"
-						styleClass="btn" process="@this" update="@form">
-					<f:setPropertyActionListener value="#{vga}"
-							target="#{vagaMB.vaga}" />
-					</h:commandButton>
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</ui:define>
->>>>>>> branch 'master' of https://github.com/caiopereirasilva77/Epark
 </ui:composition>
