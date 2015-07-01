@@ -27,23 +27,23 @@ public class ClienteController {
     public void inserir(Cliente cliente) throws Exception{
         
        if (cliente.getCpf().isEmpty()&& cliente.getPlaca().isEmpty() ){
-         throw new Exception("Cpf inválido");
+         throw new Exception("Cpf invï¿½lido");
         }
     
         if ( cliente.getPlaca().isEmpty()|| cliente.getModelo().isEmpty()){
-            throw new Exception("Placa inválida");
+            throw new Exception("Placa invï¿½lida");
         }    
             
         if ( cliente.getPlaca().isEmpty()&& cliente.getNome().isEmpty()){
-            throw new Exception("Placa ou  Nome inválidos");    
+            throw new Exception("Placa ou  Nome invï¿½lidos");    
             
         }
         if (cliente.getModelo().isEmpty()){
-            throw new Exception("Modelo inválido");
+            throw new Exception("Modelo invï¿½lido");
         }    
         if ( cliente.getNome().isEmpty() && cliente.getPlaca().isEmpty()&& cliente.getModelo().isEmpty()
                                          &&cliente.getCpf().isEmpty()){  
-            throw new Exception("CPF  inválido");
+            throw new Exception("CPF  invï¿½lido");
         }else{
              
         }
@@ -70,11 +70,11 @@ public class ClienteController {
             
        }     
         if ( cliente.getPlaca().trim().equals("") ){
-             throw new Exception("Preencha a Placa do veículo");
+             throw new Exception("Preencha a Placa do veï¿½culo");
         }
         
         if ( cliente.getModelo().trim().equals("") ){
-             throw new Exception("Preencha a Placa do veículo");
+             throw new Exception("Preencha a Placa do veï¿½culo");
              
         }
         ClienteDao.obterInstancia().atualizar(cliente);
