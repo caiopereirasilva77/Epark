@@ -1,8 +1,8 @@
+package br.senai.sc.dao;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import br.senai.sc.model.Cliente;
 import br.senai.sc.util.JpaUtil;
 

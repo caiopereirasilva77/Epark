@@ -123,8 +123,4 @@ System.out.println("tipo cliente:" + cliente.getTipocliente());
 		this.clienteDAO = clienteDAO;
 	}
 
-	
-	
-
 }
->>>>>>> branch 'master' of https://github.com/caiopereirasilva77/Epark
