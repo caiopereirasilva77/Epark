@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
 import br.senai.sc.dao.ClienteDao;
 import br.senai.sc.model.Cliente;
@@ -53,27 +52,11 @@ System.out.println("tipo cliente:" + cliente.getTipocliente());
 			   cliente.getPlaca()!=null&& 
 			   cliente.getModelo()!=null&&
 			   cliente.getTipocliente()!=null){
-				
-					cliente.setTipocliente("A");
-					
+				cliente.setTipocliente("A");
+				System.out.println("tipo cliente:" + cliente.getTipocliente());		
 				clienteDAO.insere(cliente);
 				clientes = clienteDAO.buscarTodos();
 				cliente = new Cliente();
-			}
-			
-			if (cliente.getId() == null&& 
-			    cliente.getNome()!=null&&
-			    cliente.getCpf()!=null&&
-			    cliente.getPlaca()!=null&& 
-			    cliente.getModelo()!=null&&
-			    cliente.getTipocliente()!=null){
-					
-					cliente.setTipocliente("M");
-					
-					
-						clienteDAO.insere(cliente);
-						clientes = clienteDAO.buscarTodos();
-						cliente = new Cliente();
 			}
 			
 			if (cliente.getId()!=null) {
@@ -144,3 +127,4 @@ System.out.println("tipo cliente:" + cliente.getTipocliente());
 	
 
 }
+>>>>>>> branch 'master' of https://github.com/caiopereirasilva77/Epark

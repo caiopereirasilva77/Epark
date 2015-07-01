@@ -1,30 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.senai.sc.dao;
-
-import br.senai.sc.model.Cliente;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
-
-
-
-
-
-
-import br.senai.sc.util.ConnectionUtil;
+import br.senai.sc.model.Cliente;
 import br.senai.sc.util.JpaUtil;
-
 
 /**
  *
@@ -35,7 +15,7 @@ public class ClienteDao extends BaseDAO {
 	
 	 private static ClienteDao instanciaRep;
 	 private List<Cliente> listaCliente;
-	
+	// private ConnectionUtil con;
 	 
 	 private JpaUtil con;
 	 
@@ -77,7 +57,7 @@ public class ClienteDao extends BaseDAO {
 			
 
 	}
-		////rever este metodo
+		
 		 public Cliente clientegetId(Integer id){
            Cliente c = new Cliente();
        	return (Cliente) em.createQuery("select c from Cliente c where id= : id").setParameter("id", id).getSingleResult();

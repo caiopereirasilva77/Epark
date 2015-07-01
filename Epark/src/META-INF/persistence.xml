@@ -4,6 +4,9 @@
 		<class>br.senai.sc.model.Cliente</class>
 		<class>br.senai.sc.model.Movimentacao</class>
 		<class>br.senai.sc.model.Vaga</class>
+
+
+
 		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

@@ -1,3 +1,4 @@
+
 package br.senai.sc.mb;
 
 import java.util.ArrayList;
@@ -63,4 +64,3 @@ public class VagaMB {
 	}
 
 }
-
