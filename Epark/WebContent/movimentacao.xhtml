@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form>
+			<h:messages />
+			<h:panelGrid cellpadding="2"  columns="2">
+			
+				<h:outputText value="Placa:" />
+					<h:panelGroup>
+						<h:inputText id="inPlaca" value="#{movimentacaoMB.class}"/>
+					</h:panelGroup>
+					
+					
+					
+					
+					
+
+
+				<h:outputText value="Cliente:" />
+					<h:panelGroup>
+						<h:inputText id="inCpf" value="#{clienteMB.cliente.cpf}"/>
+						<h:message for="inCpf" />
+					</h:panelGroup>
+
+				
+				<h:outputText value="Placa:" />
+					<h:panelGroup>
+						<h:inputText id="inPlaca" value="#{clienteMB.cliente.placa}"
+						required="true" requiredMessage="Placa Obrigatória" />
+						<h:message for="inPlaca" />
+					</h:panelGroup>
+				
+				
+				<h:outputText value="Modelo:" />
+					<h:panelGroup>
+						<h:inputText id="inModelo" value="#{clienteMB.cliente.modelo}"
+						required="true" requiredMessage="Modelo Obrigatório" />
+						<h:message for="inPlaca" />
+					</h:panelGroup>
+				  
+			<h:outputLabel value="Vaga :  "/>
+				<h:selectOneRadio value="#{clienteMB.cliente.tipocliente}">
+				<br />
+				
+   						<f:selectItem itemValue="A"  cellpadding="4" itemLabel="Avulso" />
+   						<f:selectItem itemValue="M" itemLabel="Mensalista" />	   			
+				</h:selectOneRadio>
+				   
+			
+
+				<h:commandButton value="Salvar" action="#{clienteMB.salvar}"
+					styleClass="btn" process="@form" update="@form" />
+
+			</h:panelGrid>
+
+			<br />
+
+			<p:dataTable value="#{clienteMB.clientes}" var="clis"
+				paginator="true" rowsPerPageTemplate="2,5,10">
+				
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					#{clis.nome}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">CPF</f:facet>
+					#{clis.cpf}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Placa</f:facet>
+					#{clis.placa}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Modelo</f:facet>
+					#{clis.modelo}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Tipo Cliente</f:facet>
+					#{clis.tipocliente}
+				</p:column>
+				
+				<p:column>
+					<p:commandButton   value="Editar" styleClass="btn"  process="@this" update="@form">
+						<f:setPropertyActionListener value="#{clis}"
+							target="#{clienteMB.cliente}" />
+					</p:commandButton>
+
+					<p:commandButton  action="#{clienteMB.excluir}" value="Excluir" styleClass="btn" process="@this" update="@form">
+						<f:setPropertyActionListener value="#{clis}"
+							target="#{clienteMB.cliente}" />
+					</p:commandButton>
+				</p:column>
+				
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
