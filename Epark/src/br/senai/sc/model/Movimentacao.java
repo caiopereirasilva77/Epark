@@ -5,9 +5,17 @@
 package br.senai.sc.model;
 
 import br.senai.sc.dao.MovimentacaoDao;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 
@@ -15,15 +23,21 @@ import java.util.Date;
  *
  * @author Caio Pereira
  */
+@Entity
 public class Movimentacao {
     
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
     private String tipocliente;
     private String placa;
     private Date dataentrada;
     private Date datasaida;
     private Double vlrtotal;
+    @ManyToOne
     private Cliente cliente;
     private Integer id;
+    @ManyToOne
     private Vaga vaga;
   
    
@@ -67,7 +81,7 @@ public class Movimentacao {
 
     public void estacionar(){
         MovimentacaoDao dao = new MovimentacaoDao();
-        dao.inserir(this);
+        dao.insere(this);
     }
     
     public void desestacionar(){

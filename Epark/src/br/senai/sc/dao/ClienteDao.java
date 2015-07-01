@@ -35,7 +35,7 @@ public class ClienteDao extends BaseDAO {
 	
 	 private static ClienteDao instanciaRep;
 	 private List<Cliente> listaCliente;
-	// private ConnectionUtil con;
+	
 	 
 	 private JpaUtil con;
 	 
@@ -77,7 +77,7 @@ public class ClienteDao extends BaseDAO {
 			
 
 	}
-		
+		////rever este metodo
 		 public Cliente clientegetId(Integer id){
            Cliente c = new Cliente();
        	return (Cliente) em.createQuery("select c from Cliente c where id= : id").setParameter("id", id).getSingleResult();

@@ -4,15 +4,12 @@
  */
 package br.senai.sc.controller;
 
-import br.senai.sc.dao.VagaDao;
-import br.senai.sc.model.Vaga;
-import com.sun.org.apache.xpath.internal.operations.String;
 import java.util.ArrayList;
 
-/**
- *
- * @author Caio Pereira
- */
+import br.senai.sc.dao.VagaDAO;
+import br.senai.sc.model.Vaga;
+
+
 public class VagaController {
     
      private static VagaController instanciaRep;
@@ -40,12 +37,8 @@ public class VagaController {
             throw new Exception("Valor unitário inválido");
         }
         
-        VagaDao.obterInstancia().inserir(vaga);
-        
     }
-    public ArrayList<Vaga> listarTodos(){
-        return VagaDao.obterInstancia().listarTodos();
-    }
+    
     
     
     
@@ -65,14 +58,13 @@ public class VagaController {
         if ( vaga.getValorUnit() == 0){
             throw new Exception("Preencha o CPF do cliente");
         }
-        VagaDao.obterInstancia().alterar(vaga);
     }
     
     public void remover(Vaga vaga) throws Exception{
         if ( vaga == null){
             throw new Exception("Selecione um cliente");
         }
-        VagaDao.obterInstancia().remover(vaga);
+        VagaDAO.obterInstancia().remover(vaga);
     }
 
     public String listarVagasLivres(java.lang.String text) {

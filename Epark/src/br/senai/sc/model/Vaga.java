@@ -1,21 +1,46 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.senai.sc.model;
 
 import br.senai.sc.dao.VagaDao;
+
 import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author caio_pereira
  */
+@Entity
 public class Vaga {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
     private int id ;
+	
+	
+	
+	
+	
+	@Column(name="Numero_vaga")
     private Integer numeroVaga;
+	
+
+	
+	
+	@Column(name="Tipo_vaga")
     private String tipoVaga;
+	
+	@Column(name="Tipo_valor")
     private String tipoValor;
+	
+	
+	@Column(name="Valor_unit")
     private double valorUnit;
     private int status;
     

@@ -8,7 +8,7 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<h:messages />
-			<h:panelGrid  columns="2">
+			<h:panelGrid cellpadding="2"  columns="2">
 			
 				<h:outputText value="Nome:" />
 					<h:panelGroup>
@@ -84,12 +84,12 @@
 				</p:column>
 				
 				<p:column>
-					<p:commandButton value="Editar" styleClass="btn"  process="@this" update="@form">
+					<p:commandButton   value="Editar" styleClass="btn"  process="@this" update="@form">
 						<f:setPropertyActionListener value="#{clis}"
 							target="#{clienteMB.cliente}" />
 					</p:commandButton>
 
-					<p:commandButton  value="Excluir" styleClass="btn" process="@this" update="@form">
+					<p:commandButton  action="#{clienteMB.excluir}" value="Excluir" styleClass="btn" process="@this" update="@form">
 						<f:setPropertyActionListener value="#{clis}"
 							target="#{clienteMB.cliente}" />
 					</p:commandButton>
