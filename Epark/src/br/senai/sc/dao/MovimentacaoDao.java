@@ -4,6 +4,7 @@
  */
 package br.senai.sc.dao;
 
+import br.senai.sc.model.Cliente;
 import br.senai.sc.model.Movimentacao;
 import br.senai.sc.model.Vaga;
 import br.senai.sc.util.JpaUtil;
@@ -64,6 +65,14 @@ public class MovimentacaoDao extends BaseDAO {
     	  
     	  
       }
+      
+      public List<Movimentacao> buscarEntradas() {
+  		return em.createQuery("select d from Cliente d").getResultList();
+  	}
+      
+      public List<Movimentacao> buscarSaidas() {
+    		return em.createQuery("select d from Cliente d").getResultList();
+    	}
       
       
     public ArrayList<Movimentacao> relacionarmovimentacaocliente(Integer idcliente) throws ParseException{

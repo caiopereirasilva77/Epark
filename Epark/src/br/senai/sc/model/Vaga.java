@@ -17,7 +17,7 @@ public class Vaga {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private Integer id ;
 	
 	@Column(name="Numero_vaga")
     private Integer numeroVaga;
@@ -36,13 +36,19 @@ public class Vaga {
     
     }
 
-	public int getId() {
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public Integer getNumeroVaga() {
 		return numeroVaga;

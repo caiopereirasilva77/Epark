@@ -9,9 +9,11 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formVaga">
-			<h2>Vagas</h2>
-			<p:messages />
-			<h:panelGrid columns="2">
+		
+		<h2>Vagas</h2>
+		<p:messages />
+			<h:inputHidden id="idVaga" value="#{vagaMB.vaga.id}"/> 
+			<h:panelGrid cellpadding="2"  columns="2">
 
 				<h:outputText value="Numero da vaga:" />
 				<h:panelGroup>
@@ -43,32 +45,53 @@
 				</h:selectOneRadio>
 
 
-				<h:commandButton value="Salvar" action="#{vagaMB.salvar}"
+				<p:commandButton value="Salvar" action="#{vagaMB.salvar}"
 					styleClass="btn" process="@form" update="@form" />
 
 			</h:panelGrid>
 
 			<br />
 
-			<p:dataTable value="#{vagasMB.clientes}" var="vga">
-				<p:column>#{vga.id}</p:column>
-				<p:column>#{vga.numeroVaga}</p:column>
-				<p:column>#{vga.tipoVaga}</p:column>
-				<p:column>#{vga.tipoValor}</p:column>
-				<p:column>#{vga.valorUnit}</p:column>
-				<p:column>#{vga.status}</p:column>
+			<p:dataTable value="#{vagaMB.vagas}" var="vga"
+			paginator="true" rowsPerPageTemplate="2,5,10">
+			
 				<p:column>
-					<h:commandButton value="Editar" action="#{vagaMB.salvar}"
+					<f:facet name="header">#ID</f:facet>
+					#{vga.id}
+				</p:column>
+				<p:column>
+					<f:facet name="header">Numero Vaga</f:facet>
+					#{vga.numeroVaga}
+				</p:column>
+				<p:column>
+					<f:facet name="header">Tipo Vaga</f:facet>
+					#{vga.tipoVaga}
+				</p:column>
+				<p:column>
+					<f:facet name="header">Tipo Valor</f:facet>
+					#{vga.tipoValor}
+				</p:column>
+				<p:column>
+					<f:facet name="header">Valor unit.</f:facet>
+					#{vga.valorUnit}
+				</p:column>
+				<p:column>
+				<f:facet name="header">Status</f:facet>
+					#{vga.status}
+				</p:column>
+				<p:column>
+				
+				
+					<p:commandButton   value="Editar" styleClass="btn"  process="@this" update="@form">
+      					<f:setPropertyActionListener value="#{vga}"
+      						 target="#{vagaMB.vaga}" />
+   					  </p:commandButton>
+	
+					<p:commandButton action="#{vagaMB.excluir}" value="Excluir"
 						styleClass="btn" process="@this" update="@form">
 						<f:setPropertyActionListener value="#{vga}"
 							target="#{vagaMB.vaga}" />
-					</h:commandButton>
-
-					<h:commandButton action="#{vagaMB.excluir}" value="Excluir"
-						styleClass="btn" process="@this" update="@form">
-						<f:setPropertyActionListener value="#{vga}"
-							target="#{vagaMB.vaga}" />
-					</h:commandButton>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>

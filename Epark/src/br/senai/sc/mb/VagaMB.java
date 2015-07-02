@@ -31,6 +31,7 @@ public class VagaMB {
 		if (vaga.getId() > 0) {
 			vagaDAO.atualizar(vaga);			
 		} else {
+			vaga.setId(null);
 			vagaDAO.inserir(vaga);
 		}
 		
