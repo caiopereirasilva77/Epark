@@ -30,12 +30,15 @@ public class VagaMB {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (vaga.getId() > 0) {
 			vagaDAO.atualizar(vaga);
-			vaga = new Vaga();
+			
 		} else {
 			vagaDAO.inserir(vaga);
-			vagas = vagaDAO.listarTodos();
-			vaga = new Vaga();
+			
+			
 		}
+		
+		vaga = new Vaga();
+		vagas = vagaDAO.listarTodos();
 		context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Salvo com sucesso!", ""));
 		return "";

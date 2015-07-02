@@ -13,7 +13,7 @@ public class BaseDAO {
 	protected void conectar() {  
 		try {  
 			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grupo7", "root", "");    
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/epark", "root", "");    
 			comando = con.createStatement();   
 		} catch (SQLException e) {  
 			e.printStackTrace();
