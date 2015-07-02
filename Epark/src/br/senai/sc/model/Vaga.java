@@ -76,11 +76,13 @@ public class Vaga {
         return tipoValor;
     }
 
-    public void setTipovalor(String tipoValor) {
-        this.tipoValor = tipoValor;
-    }
+   
 
-    public double getValorUnit() {
+    public void setTipoValor(String tipoValor) {
+		this.tipoValor = tipoValor;
+	}
+
+	public double getValorUnit() {
         return valorUnit;
     }
 
@@ -94,5 +96,7 @@ public class Vaga {
 
     public void setStatus(int status) {
         this.status = status;
-    }        
+    } 
+    
+    
 }

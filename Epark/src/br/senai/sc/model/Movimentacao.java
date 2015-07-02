@@ -5,6 +5,7 @@
 package br.senai.sc.model;
 
 import br.senai.sc.dao.MovimentacaoDao;
+import br.senai.sc.dao.VagaDAO;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -30,7 +31,7 @@ public class Movimentacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
     private String tipocliente;
-    private String placa;
+   
     private Date dataentrada;
     private Date datasaida;
     private Double vlrtotal;
@@ -51,7 +52,7 @@ public class Movimentacao {
             if(movimentacao.getId() > 0){
                 id=movimentacao.getId();
                 tipocliente=movimentacao.getTipocliente();
-                placa=movimentacao.getCliente().getPlaca();
+               
                 dataentrada=movimentacao.getDataentrada();
                 datasaida=movimentacao.getDatasaida();
                 vlrtotal=movimentacao.getVlrtotal();
@@ -68,7 +69,7 @@ public class Movimentacao {
             if(movimentacao.getId() > 0){
                 id=movimentacao.getId();
                 tipocliente=movimentacao.getTipocliente();
-                placa=movimentacao.getCliente().getPlaca();
+        //        placa=movimentacao.getCliente().getPlaca();
                 dataentrada=movimentacao.getDataentrada();
                 datasaida=movimentacao.getDatasaida();
                 vlrtotal=movimentacao.getVlrtotal();
@@ -81,11 +82,15 @@ public class Movimentacao {
 
     public void estacionar(){
         MovimentacaoDao dao = new MovimentacaoDao();
+        VagaDAO vagadao = new VagaDAO();
+        vagadao.atualizar(this.vaga);
         dao.insere(this);
     }
     
     public void desestacionar(){
         MovimentacaoDao dao = new MovimentacaoDao();
+        VagaDAO vagadao = new VagaDAO();
+        vagadao.atualizar(this.vaga);
         dao.inserirSaida(this);        
     }
     
@@ -142,13 +147,7 @@ public class Movimentacao {
         this.tipocliente = tipocliente;
     }
 
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
+  
 
     public Date getDataentrada() {
         return dataentrada;

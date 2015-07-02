@@ -57,7 +57,6 @@ public class MovimentacaoDao extends BaseDAO {
     	 
   		
 			em.getTransaction().begin();
-			em.merge(movimentacao.getVaga().setStatus("1");
 			em.persist(movimentacao);
 			em.getTransaction().commit();
 		}
@@ -101,7 +100,7 @@ public class MovimentacaoDao extends BaseDAO {
      
     	 return (Movimentacao) em.createQuery("select m from movimentacao m "+
     			"inner join Cliente c on m.cliente_id=c.id"+
-    			 "where Placa='"+placa+"' and dtsaida is null").setParameter("placa", placa).getSingleResult();  
+    			 "where c.placa=:placa and m.dtsaida is null").setParameter("placa", placa).getSingleResult();  
    
      }
 }        

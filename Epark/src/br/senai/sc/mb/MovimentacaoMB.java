@@ -56,8 +56,18 @@ public class MovimentacaoMB {
 	            return "Clientenaoexiste";
 	        }
 	   }
+	    
+	    
 	    public void estacionar(Movimentacao movimentacao) {
-	        movimentacao.estacionar();
+	    	
+	    	if (movimentacao) {
+	    		  movimentacao.estacionar();
+			}else{
+				movimentacao.desestacionar();
+			}
+	      
+	        
+	        
 	    }
 	    public void desestacionar(Movimentacao movimentacao) throws Exception{
 	        movimentacao.desestacionar();
