@@ -17,7 +17,7 @@ public class VagaMB {
 
 	private Vaga vaga;
 	private List<Vaga> vagas;
-	private VagaDAO vagaDAO = new VagaDAO();
+	private VagaDAO vagaDAO = VagaDAO.obterInstancia();
 
 	@PostConstruct
 	private void init() {

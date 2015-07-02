@@ -17,7 +17,6 @@ public class Vaga {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
     private int id ;
 	
 	@Column(name="Numero_vaga")

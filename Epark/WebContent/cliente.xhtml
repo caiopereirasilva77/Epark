@@ -8,7 +8,6 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<h:messages />
-			<h:inputHidden id="idCliente" value="#{clienteMB.cliente.id}"/> 
 			<h:panelGrid cellpadding="2"  columns="2">
 			
 				<h:outputText value="Nome:" />
@@ -36,14 +35,12 @@
 					<h:panelGroup>
 						<h:inputText id="inModelo" value="#{clienteMB.cliente.modelo}"
 						required="true" requiredMessage="Modelo Obrigatório" />
-						<h:message for="inPlaca" />
+						<h:message for="inModelo" />
 					</h:panelGroup>
 				  
-			<h:outputLabel value="Tipo Cliente :  "/>
+			<h:outputLabel value="Tipo Cliente :"/>
 				<h:selectOneRadio value="#{clienteMB.cliente.tipocliente}">
-				<br />
-				
-   						<f:selectItem itemValue="A"  cellpadding="4" itemLabel="Avulso" />
+   						<f:selectItem itemValue="A" itemLabel="Avulso" />
    						<f:selectItem itemValue="M" itemLabel="Mensalista" />	   			
 				</h:selectOneRadio>
 				   

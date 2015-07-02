@@ -17,7 +17,7 @@ public class ClienteMB {
 	private Cliente cliente;
 	private String confCpfCliente;
 	private List<Cliente> clientes;
-	private ClienteDao clienteDAO = new ClienteDao();
+	private ClienteDao clienteDAO = ClienteDao.obterInstancia();
 
 	@PostConstruct
 	private void init() {
@@ -28,7 +28,7 @@ public class ClienteMB {
 
 	public String salvar() {
 		// validaCampos();
-		if (cliente.getId() > 0) {
+		if (cliente.getId() != null) {
 			clienteDAO.atualizar(cliente);
 		} else {
 			clienteDAO.insere(cliente);
