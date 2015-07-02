@@ -28,9 +28,15 @@ public class VagaMB {
 
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
+		if(vaga.getTipoVaga().equals("Mensalista")){
+			vaga.setTipoValor("Mensal");
+		}else{
+			vaga.setTipoValor("Hora/Fração");
+		}
 		if (vaga.getId() > 0) {
 			vagaDAO.atualizar(vaga);			
 		} else {
+			vaga.setId(null);
 			vagaDAO.inserir(vaga);
 		}
 		

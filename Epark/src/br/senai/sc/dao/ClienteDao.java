@@ -45,7 +45,7 @@ public class ClienteDao extends BaseDAO {
 		return (Cliente) em.find(Cliente.class, id);
 	}
 
-	public Cliente clientegetPlaca(String placa) {
+	public Cliente burcarPorPlaca(String placa) {
 		return (Cliente) em
 				.createQuery("select c from Cliente c where c.placa= :placa")
 				.setParameter("placa", placa).getSingleResult();

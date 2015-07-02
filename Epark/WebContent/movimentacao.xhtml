@@ -10,96 +10,44 @@
 			<h:messages />
 			<h:panelGrid cellpadding="2"  columns="2">
 			
-				<h:outputText value="Placa:" />
+				<h:outputText value="Consultar placa:" />
 					<h:panelGroup>
-						<h:inputText id="inPlaca" value="#{movimentacaoMB.class}"/>
+						<h:inputText id="inPlaca" value="#{movimentacaoMB.consultaPlaca}"/>
 					</h:panelGroup>
 					
-					
-					
-					
-					
-
-
-				<h:outputText value="Cliente:" />
-					<h:panelGroup>
-						<h:inputText id="inCpf" value="#{clienteMB.cliente.cpf}"/>
-						<h:message for="inCpf" />
-					</h:panelGroup>
-
-				
-				<h:outputText value="Placa:" />
-					<h:panelGroup>
-						<h:inputText id="inPlaca" value="#{clienteMB.cliente.placa}"
-						required="true" requiredMessage="Placa Obrigatória" />
-						<h:message for="inPlaca" />
-					</h:panelGroup>
-				
-				
-				<h:outputText value="Modelo:" />
-					<h:panelGroup>
-						<h:inputText id="inModelo" value="#{clienteMB.cliente.modelo}"
-						required="true" requiredMessage="Modelo Obrigatório" />
-						<h:message for="inPlaca" />
-					</h:panelGroup>
-				  
-			<h:outputLabel value="Vaga :  "/>
-				<h:selectOneRadio value="#{clienteMB.cliente.tipocliente}">
-				<br />
-				
-   						<f:selectItem itemValue="A"  cellpadding="4" itemLabel="Avulso" />
-   						<f:selectItem itemValue="M" itemLabel="Mensalista" />	   			
-				</h:selectOneRadio>
-				   
-			
-
-				<h:commandButton value="Salvar" action="#{clienteMB.salvar}"
+					<p:commandButton value="consultar" action="#{movimentacaoMB.consultarPlaca}"
 					styleClass="btn" process="@form" update="@form" />
-
 			</h:panelGrid>
 
 			<br />
 
-			<p:dataTable value="#{clienteMB.clientes}" var="clis"
+			<p:dataTable value="#{movimentacaoMB.movimentacoes}" var="mov"
 				paginator="true" rowsPerPageTemplate="2,5,10">
 				
 				<p:column>
-					<f:facet name="header">Nome</f:facet>
-					#{clis.nome}
+					<f:facet name="header">#ID</f:facet>
+					#{mov.id}
 				</p:column>
 				
 				<p:column>
-					<f:facet name="header">CPF</f:facet>
-					#{clis.cpf}
+					<f:facet name="header">Vaga</f:facet>
+					#{mov.vaga.numeroVaga}
 				</p:column>
 				
 				<p:column>
 					<f:facet name="header">Placa</f:facet>
-					#{clis.placa}
+					#{mov.cliente.placa}
 				</p:column>
 				
 				<p:column>
-					<f:facet name="header">Modelo</f:facet>
-					#{clis.modelo}
+					<f:facet name="header">Data entrada</f:facet>
+					#{mov.dataentrada}
 				</p:column>
 				
 				<p:column>
-					<f:facet name="header">Tipo Cliente</f:facet>
-					#{clis.tipocliente}
-				</p:column>
-				
-				<p:column>
-					<p:commandButton   value="Editar" styleClass="btn"  process="@this" update="@form">
-						<f:setPropertyActionListener value="#{clis}"
-							target="#{clienteMB.cliente}" />
-					</p:commandButton>
-
-					<p:commandButton  action="#{clienteMB.excluir}" value="Excluir" styleClass="btn" process="@this" update="@form">
-						<f:setPropertyActionListener value="#{clis}"
-							target="#{clienteMB.cliente}" />
-					</p:commandButton>
-				</p:column>
-				
+					<f:facet name="header">Data saída</f:facet>
+					#{mov.datasaida}
+				</p:column>	
 			</p:dataTable>
 		</h:form>
 	</ui:define>
