@@ -43,23 +43,25 @@ public class ClienteMB {
 			cliente.getTipocliente()!=null) {
 			
 		cliente.setTipocliente("A");
-System.out.println("tipo cliente:" + cliente.getTipocliente());			
+		clienteDAO.insere(cliente);
+		clientes = clienteDAO.buscarTodos();
+		cliente = new Cliente();
 		}
 		
 			if(cliente.getId() == null&& 
-			   cliente.getNome().isEmpty()&& 
-			   cliente.getCpf().isEmpty()&&
+			   cliente.getNome()!=null&&
+			   cliente.getCpf()!=null&&
 			   cliente.getPlaca()!=null&& 
 			   cliente.getModelo()!=null&&
 			   cliente.getTipocliente()!=null){
-				cliente.setTipocliente("A");
-				System.out.println("tipo cliente:" + cliente.getTipocliente());		
+				cliente.setTipocliente("M");
+						
 				clienteDAO.insere(cliente);
 				clientes = clienteDAO.buscarTodos();
 				cliente = new Cliente();
 			}
 			
-			if (cliente.getId()!=null) {
+			if (cliente.getId()>0) {
 				
 				clienteDAO.atualizar(cliente);
 				clientes = clienteDAO.buscarTodos();

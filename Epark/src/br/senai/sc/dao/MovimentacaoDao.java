@@ -50,12 +50,7 @@ public class MovimentacaoDao extends BaseDAO {
 		
       
       public void insere(Movimentacao movimentacao){  
-    	  
-    	//Alocar vaga
-//        String query1 = "UPDATE VAGA SET STATUS=1 WHERE ID=?";
-    	  
-    	 
-  		
+	   		
 			em.getTransaction().begin();
 			em.persist(movimentacao);
 			em.getTransaction().commit();
@@ -72,8 +67,8 @@ public class MovimentacaoDao extends BaseDAO {
       
     public ArrayList<Movimentacao> relacionarmovimentacaocliente(Integer idcliente) throws ParseException{
 	  listaMovimentacao.clear();
-	  return (ArrayList<Movimentacao>) em.createQuery("select mov from Movimentacao mov where cliente_id="+idcliente+ 
-			  "and dtentrada  is not null and dtsaida is null ").getResultList();
+	  return (ArrayList<Movimentacao>) em.createQuery("select mov from Movimentacao mov where cliente_id=:idcliente "+ 
+			  "and dtentrada  is not null and dtsaida is null ").setParameter("id", idcliente).getResultList();
 	 
 	  
       
@@ -93,10 +88,6 @@ public class MovimentacaoDao extends BaseDAO {
      
      public Movimentacao movimentacaoSaidaGet(String placa) throws ParseException{
     	
- //   	 String query = "SELECT * FROM MOVIMENTACAO m " +
-//               "inner join CLIENTE c on m.cliente_id=c.id " +
-//               "WHERE Placa='"+placa+"' and dtsaida is null";
-    	 
      
     	 return (Movimentacao) em.createQuery("select m from movimentacao m "+
     			"inner join Cliente c on m.cliente_id=c.id"+

@@ -84,6 +84,40 @@ public class ClienteDao extends BaseDAO {
 			 
 			
 		 }
+
+		public static ClienteDao getInstanciaRep() {
+			return instanciaRep;
+		}
+
+		public static void setInstanciaRep(ClienteDao instanciaRep) {
+			ClienteDao.instanciaRep = instanciaRep;
+		}
+
+		public List<Cliente> getListaCliente() {
+			return listaCliente;
+		}
+
+		public void setListaCliente(List<Cliente> listaCliente) {
+			this.listaCliente = listaCliente;
+		}
+
+		public JpaUtil getCon() {
+			return con;
+		}
+
+		public void setCon(JpaUtil con) {
+			this.con = con;
+		}
+
+		public EntityManager getEm() {
+			return em;
+		}
+
+		public void setEm(EntityManager em) {
+			this.em = em;
+		}
+		 
+		 
 		 	
     
     //SINGLETON//
