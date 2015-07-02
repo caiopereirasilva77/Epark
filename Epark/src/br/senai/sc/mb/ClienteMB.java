@@ -26,8 +26,8 @@ public class ClienteMB {
 		clientes = clienteDAO.buscarTodos();
 	}
 
-	public String salvar() {		
-		//validaCampos();
+	public String salvar() {
+		// validaCampos();
 		if (cliente.getId() > 0) {
 			clienteDAO.atualizar(cliente);
 		} else {
@@ -38,15 +38,17 @@ public class ClienteMB {
 		return "";
 	}
 
-	private String validaCampos(){
+	private String validaCampos() {
+		//Ainda implementando, não ta 100%
 		FacesContext context = FacesContext.getCurrentInstance();
-		if(cliente.getNome().isEmpty()){
-			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Campo Nome obrigatório!", ""));
+		if (cliente.getNome().isEmpty()) {
+			context.addMessage("", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Campo Nome obrigatório!", ""));
 		}
-		if(cliente.getModelo().isEmpty()){
-			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Campo Modelo obrigatório!", ""));
+		if (cliente.getModelo().isEmpty()) {
+			context.addMessage("", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Campo Modelo obrigatório!",
+					""));
 		}
 		if (cliente.getNome().isEmpty() && cliente.getCpf().isEmpty()
 				&& cliente.getPlaca() != null && cliente.getModelo() != null
@@ -63,13 +65,13 @@ public class ClienteMB {
 		}
 		return "";
 	}
+
 	public String excluir() throws Exception {
 		ClienteDao dao = new ClienteDao();
 		dao.excluir(cliente);
 		clientes = dao.buscarTodos();
 		cliente = new Cliente();
 		return "";
-
 	}
 
 	public Cliente getCliente() {
@@ -103,5 +105,4 @@ public class ClienteMB {
 	public void setClienteDAO(ClienteDao clienteDAO) {
 		this.clienteDAO = clienteDAO;
 	}
-
 }

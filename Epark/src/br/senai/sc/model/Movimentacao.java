@@ -83,14 +83,14 @@ public class Movimentacao {
     public void estacionar(){
         MovimentacaoDao dao = new MovimentacaoDao();
         VagaDAO vagadao = new VagaDAO();
-        vagadao.atualizar(this.vaga);
+        vagadao.alterarStatusEstacionar(this.vaga.getId());
         dao.insere(this);
     }
     
     public void desestacionar(){
         MovimentacaoDao dao = new MovimentacaoDao();
         VagaDAO vagadao = new VagaDAO();
-        vagadao.atualizar(this.vaga);
+        vagadao.alterarStatusDesestacionar(this.vaga.getId());
         dao.inserirSaida(this);        
     }
     

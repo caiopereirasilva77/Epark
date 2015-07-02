@@ -59,11 +59,18 @@ public class VagaDAO {
 	public List<Vaga> listarVagas(String tipo, String status) {
 		return em
 				.createQuery(
-						"select v from Vaga v where v.tipoVaga =:tipo and v.status = :status")
+						"select v from Vaga v where v.tipoVaga = :tipo and v.status = :status")
 				.setParameter("status", status).setParameter("tipo", tipo)
 				.getResultList();
 	}
+
+	public Vaga alterarStatusEstacionar(int id) {
+		return (Vaga) em.createQuery("update vaga set status=1 where=:id")
+				.setParameter("id", id).getSingleResult();
+	}
+
+	public Vaga alterarStatusDesestacionar(int id) {
+		return (Vaga) em.createQuery("update vaga set status=0 where=:id")
+				.setParameter("id", id).getSingleResult();
+	}
 }
-
-
-

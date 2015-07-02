@@ -60,7 +60,7 @@ public class MovimentacaoMB {
 	    
 	    public void estacionar(Movimentacao movimentacao) {
 	    	
-	    	if (movimentacao) {
+	    	if () {
 	    		  movimentacao.estacionar();
 			}else{
 				movimentacao.desestacionar();
