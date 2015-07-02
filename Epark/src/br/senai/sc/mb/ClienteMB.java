@@ -107,4 +107,5 @@ public class ClienteMB {
 	public void setClienteDAO(ClienteDao clienteDAO) {
 		this.clienteDAO = clienteDAO;
 	}
+	
 }

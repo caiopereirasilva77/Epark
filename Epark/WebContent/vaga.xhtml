@@ -9,11 +9,12 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formVaga">
-			<h2>Vagas</h2>
-			<p:messages />
-				<h:inputHidden id="idVaga" value="#{vagaMB.vaga.id}"/>
-			
-			<h:panelGrid columns="2">
+		
+		<h2>Vagas</h2>
+		<p:messages />
+			<h:inputHidden id="idVaga" value="#{vagaMB.vaga.id}"/> 
+			<h:panelGrid cellpadding="2"  columns="2">
+
 				<h:outputText value="Numero da vaga:" />
 				<h:panelGroup>
 					<h:inputText id="inNumeroVaga" value="#{vagaMB.vaga.numeroVaga}" />
