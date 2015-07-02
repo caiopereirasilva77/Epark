@@ -60,7 +60,7 @@ public class MovimentacaoMB {
 	    
 	    public void estacionar(Movimentacao movimentacao) {
 	    	
-	    	if () {
+	    	if (movimentacao.getId()>0) {
 	    		  movimentacao.estacionar();
 			}else{
 				movimentacao.desestacionar();

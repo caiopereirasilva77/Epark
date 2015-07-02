@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+
 import br.senai.sc.model.Cliente;
 import br.senai.sc.util.JpaUtil;
 
@@ -51,7 +52,7 @@ public class ClienteDao extends BaseDAO {
 	}
 
 	public void excluir(Cliente cliente) throws Exception {
-		//cliente = em.find(Cliente.class, cliente.getId());
+		cliente = em.find(Cliente.class, cliente.getId());
 		em.getTransaction().begin();
 		em.remove(cliente);
 		em.getTransaction().commit();

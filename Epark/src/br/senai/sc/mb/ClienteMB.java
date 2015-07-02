@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+
 import br.senai.sc.dao.ClienteDao;
 import br.senai.sc.model.Cliente;
 
@@ -28,9 +29,10 @@ public class ClienteMB {
 
 	public String salvar() {
 		// validaCampos();
-		if (cliente.getId() != null) {
+		if (cliente.getId() > 0) {
 			clienteDAO.atualizar(cliente);
 		} else {
+			cliente.setId(null);
 			clienteDAO.insere(cliente);
 		}
 		clientes = clienteDAO.buscarTodos();

@@ -16,6 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.oracle.webservices.internal.api.EnvelopeStyle;
+
+
 /**
  *
  * @author caio_pereira
@@ -25,13 +28,14 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private String placa;
 	private String modelo;
 	private String tipocliente;
-	private int numeroCartao;
+	
 
 	public Cliente(Integer pid) {
 		Cliente tCliente = ClienteDao.obterInstancia().clientegetId(pid);
@@ -124,11 +128,5 @@ public class Cliente {
 
 	}
 
-	public Integer getNumeroCartao() {
-		return numeroCartao;
-	}
 
-	public void setNumeroCartao(Integer numeroCartao) {
-		this.numeroCartao = numeroCartao;
-	}
 }
