@@ -8,20 +8,9 @@
 </h:head>
 <h:body>
 
-	<h:form>
-		<h:messages />
-		<h:panelGrid columns="3">
-			<h:outputText value="Login: " />
-			<h:inputText value="#{autenticacaoMB.login}" id="inLogin"
-				required="true" requiredMessage="Obigatório!" />
-			<h:message for="inLogin" />
-			<h:outputText value="Senha: " />
-			<h:inputSecret value="#{autenticacaoMB.senha}" id="inSenha"
-				required="true" requiredMessage="Obigatório!" />
-			<h:message for="inSenha" />
+	<h:form>		
 			<h:commandButton styleClass="btn" action="#{autenticacaoMB.logar}"
 				value="Entrar" />
-		</h:panelGrid>
 	</h:form>
 
 </h:body>

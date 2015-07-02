@@ -11,86 +11,66 @@ import javax.faces.context.FacesContext;
 import br.senai.sc.dao.ClienteDao;
 import br.senai.sc.model.Cliente;
 
-
 @ManagedBean
 public class ClienteMB {
-	
+
 	private Cliente cliente;
 	private String confCpfCliente;
 	private List<Cliente> clientes;
 	private ClienteDao clienteDAO = new ClienteDao();
 
-
 	@PostConstruct
-	private void init(){
+	private void init() {
 		cliente = new Cliente();
-		 clientes= new ArrayList<Cliente>();
-
-		 clientes = clienteDAO.buscarTodos();
-
+		clientes = new ArrayList<Cliente>();
+		clientes = clienteDAO.buscarTodos();
 	}
 
-	public String salvar(){
-		FacesContext context = FacesContext.getCurrentInstance();
-//		if (cliente.getCpf().equals(confCpfCliente)&& cliente.getId() ==null){
-//			
-//			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "cpf ja existe", ""));
-		
-		if (cliente.getNome().isEmpty()&& 
-			cliente.getCpf().isEmpty()&&
-			cliente.getPlaca()!=null&& 
-			cliente.getModelo()!=null&&
-			cliente.getTipocliente()!=null) {
-			
-		cliente.setTipocliente("A");
-System.out.println("tipo cliente:" + cliente.getTipocliente());			
+	public String salvar() {		
+		//validaCampos();
+		if (cliente.getId() > 0) {
+			clienteDAO.atualizar(cliente);
+		} else {
+			clienteDAO.insere(cliente);
 		}
-		
-			if(cliente.getId() == null&& 
-			   cliente.getNome().isEmpty()&& 
-			   cliente.getCpf().isEmpty()&&
-			   cliente.getPlaca()!=null&& 
-			   cliente.getModelo()!=null&&
-			   cliente.getTipocliente()!=null){
-				cliente.setTipocliente("A");
-				System.out.println("tipo cliente:" + cliente.getTipocliente());		
-				clienteDAO.insere(cliente);
-				clientes = clienteDAO.buscarTodos();
-				cliente = new Cliente();
-			}
-			
-			if (cliente.getId()!=null) {
-				
-				clienteDAO.atualizar(cliente);
-				clientes = clienteDAO.buscarTodos();
-				cliente = new Cliente();
-				
-				
-			}
-				
-			
-			
-//		}else{
-//			clienteDAO.insere(cliente);
-//			clientes = clienteDAO.buscarTodos();
-//			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", ""));
-			
-		
+		clientes = clienteDAO.buscarTodos();
+		cliente = new Cliente();
 		return "";
 	}
-	
-	
-	public String excluir() throws Exception{
+
+	private String validaCampos(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(cliente.getNome().isEmpty()){
+			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Campo Nome obrigatório!", ""));
+		}
+		if(cliente.getModelo().isEmpty()){
+			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Campo Modelo obrigatório!", ""));
+		}
+		if (cliente.getNome().isEmpty() && cliente.getCpf().isEmpty()
+				&& cliente.getPlaca() != null && cliente.getModelo() != null
+				&& cliente.getTipocliente() != null) {
+			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Salvo com sucesso!", ""));
+		}
+		if (cliente.getId() == 0 && cliente.getNome().isEmpty()
+				&& cliente.getCpf().isEmpty() && cliente.getPlaca() != null
+				&& cliente.getModelo() != null
+				&& cliente.getTipocliente() != null) {
+			context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Salvo com sucesso!", ""));
+		}
+		return "";
+	}
+	public String excluir() throws Exception {
 		ClienteDao dao = new ClienteDao();
 		dao.excluir(cliente);
 		clientes = dao.buscarTodos();
 		cliente = new Cliente();
-		return"";
-		
-		
-	}
+		return "";
 
-	
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -103,6 +83,7 @@ System.out.println("tipo cliente:" + cliente.getTipocliente());
 	public String getConfSenha() {
 		return confCpfCliente;
 	}
+
 	public void setConfSenha(String confSenha) {
 		this.confCpfCliente = confSenha;
 	}

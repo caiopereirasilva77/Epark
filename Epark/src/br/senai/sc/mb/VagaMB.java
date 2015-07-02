@@ -29,12 +29,9 @@ public class VagaMB {
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (vaga.getId() > 0) {
-			vagaDAO.atualizar(vaga);
-			
+			vagaDAO.atualizar(vaga);			
 		} else {
 			vagaDAO.inserir(vaga);
-			
-			
 		}
 		
 		vaga = new Vaga();

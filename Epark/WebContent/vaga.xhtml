@@ -11,41 +11,37 @@
 		<h:form id="formVaga">
 			<h2>Vagas</h2>
 			<p:messages />
-			<h:panelGrid cellpading="2" columns="4">
-			
+			<h:panelGrid columns="2">
+
 				<h:outputText value="Numero da vaga:" />
-					<h:panelGroup>
-						<h:inputText id="inNumeroVaga" value="#{vagaMB.vaga.numeroVaga}"/>
-					</h:panelGroup>
+				<h:panelGroup>
+					<h:inputText id="inNumeroVaga" value="#{vagaMB.vaga.numeroVaga}" />
+				</h:panelGroup>
 
 
 				<h:outputText value="Tipo da vaga:" />
-					<h:panelGroup>
-						<h:inputText id="inTipoVaga" value="#{vagaMB.vaga.tipoVaga}"/>
-						<h:message for="inTipoVaga" />
-					</h:panelGroup>
-
-				
-				<h:outputText value="Valor (tipo):" />
-					<h:panelGroup>
-						<h:inputText id="inValorTipo" value="#{vagaMB.vaga.tipoValor}"
-						required="true" requiredMessage="..." />
-						<h:message for="inValorTipo" />
-					</h:panelGroup>
-				
-				
+				<h:panelGroup>
+					<h:inputText id="inTipoVaga" value="#{vagaMB.vaga.tipoVaga}" />
+					<h:message for="inTipoVaga" />
+				</h:panelGroup>
 				<h:outputText value="Valor:" />
-					<h:panelGroup>
-						<h:inputText id="inValor" value="#{vagaMB.vaga.valorUnit}"
+				<h:panelGroup>
+					<h:inputText id="inValor" value="#{vagaMB.vaga.valorUnit}"
 						required="true" requiredMessage="Valor Obrigatório" />
-						<h:message for="inValor" />
-					</h:panelGroup>
-				
+					<h:message for="inValor" />
+				</h:panelGroup>
+				<h:outputText value="Valor (tipo):" />
+				<h:selectOneRadio value="#{vagaMB.vaga.tipoValor}">
+					<f:selectItem itemValue="Mensal" itemLabel="Mensal" />
+					<f:selectItem itemValue="Hora" itemLabel="Hora/Fração" />
+				</h:selectOneRadio>
+
+				<h:panelGroup></h:panelGroup>
 				<h:selectOneRadio value="#{vagaMB.vaga.status}">
-   						<f:selectItem itemValue="0" itemLabel="Livre" />
-   						<f:selectItem itemValue="1" itemLabel="Ocupada" />	   			
-				</h:selectOneRadio>	   
-			
+					<f:selectItem itemValue="0" itemLabel="Livre" />
+					<f:selectItem itemValue="1" itemLabel="Ocupada" />
+				</h:selectOneRadio>
+
 
 				<h:commandButton value="Salvar" action="#{vagaMB.salvar}"
 					styleClass="btn" process="@form" update="@form" />
@@ -70,7 +66,7 @@
 
 					<h:commandButton action="#{vagaMB.excluir}" value="Excluir"
 						styleClass="btn" process="@this" update="@form">
-					<f:setPropertyActionListener value="#{vga}"
+						<f:setPropertyActionListener value="#{vga}"
 							target="#{vagaMB.vaga}" />
 					</h:commandButton>
 				</p:column>

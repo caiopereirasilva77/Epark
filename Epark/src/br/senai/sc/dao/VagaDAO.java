@@ -49,17 +49,17 @@ public class VagaDAO {
 		return em.find(Vaga.class, id);
 	}
 
-	public Vaga buscarPorNumero(int id) {
+	public Vaga buscarPorNumero(int numero) {
 		return (Vaga) em
 				.createQuery(
-						"SELECT v FROM Vaga v WHERE v.numeroVaga = :numero")
-				.setParameter("numero", id).getSingleResult();
+						"select v from Vaga v where v.numeroVaga = :numero")
+				.setParameter("numero", numero).getSingleResult();
 	}
 
 	public List<Vaga> listarVagas(String tipo, String status) {
 		return em
 				.createQuery(
-						"SELECT v FROM Vaga v WHERE v.tipoVaga =:tipo AND v.status = :status")
+						"select v from Vaga v where v.tipoVaga =:tipo and v.status = :status")
 				.setParameter("status", status).setParameter("tipo", tipo)
 				.getResultList();
 	}
