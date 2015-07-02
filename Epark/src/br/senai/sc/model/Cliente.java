@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.oracle.webservices.internal.api.EnvelopeStyle;
 
 
 /**
@@ -49,22 +48,10 @@ public class Cliente {
 		}
 	}
 
-	public Cliente(String pplaca) {
-		Cliente tCliente = ClienteDao.obterInstancia().clientegetPlaca(pplaca);
-		if (tCliente.getId() != null) {
-			id = tCliente.getId();
-			nome = tCliente.getNome();
-			cpf = tCliente.getCpf();
-			placa = tCliente.getPlaca();
-			modelo = tCliente.getModelo();
-			tipocliente = tCliente.getTipocliente();
-		}
-	}
-
 	public Cliente() {
 
 	}
-
+	
 	public boolean estaestacionado() throws ParseException {
 		ArrayList<Movimentacao> lista = MovimentacaoDao.obterInstancia()
 				.relacionarmovimentacaocliente(id);

@@ -18,162 +18,136 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
-
 /**
  *
  * @author Caio Pereira
  */
 @Entity
 public class Movimentacao {
-    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-    private String tipocliente;
-   
-    private Date dataentrada;
-    private Date datasaida;
-    private Double vlrtotal;
-    @ManyToOne
-    private Cliente cliente;
-    private Integer id;
-    @ManyToOne
-    private Vaga vaga;
-  
-   
-    public Movimentacao(){   
-    }
+	@Column(unique = true, nullable = false)
+	private Integer id;
+	private Date dataentrada;
+	private Date datasaida;
+	private Double vlrtotal;
+	@ManyToOne
+	private Cliente cliente;
+	@ManyToOne
+	private Vaga vaga;
 
-  
-    public Movimentacao(Integer pid){
-        try {
-            Movimentacao movimentacao = MovimentacaoDao.obterInstancia().movimentacaoget(pid);
-            if(movimentacao.getId() > 0){
-                id=movimentacao.getId();
-                tipocliente=movimentacao.getTipocliente();
-               
-                dataentrada=movimentacao.getDataentrada();
-                datasaida=movimentacao.getDatasaida();
-                vlrtotal=movimentacao.getVlrtotal();
-                cliente=movimentacao.getCliente();
-                vaga=movimentacao.getVaga();
-            }
-        } catch (ParseException ex) {
-        }
-    }
-  
-    public Movimentacao(String pPlaca){
-        try {
-            Movimentacao movimentacao = MovimentacaoDao.obterInstancia().movimentacaoSaidaGet(pPlaca);
-            if(movimentacao.getId() > 0){
-                id=movimentacao.getId();
-                tipocliente=movimentacao.getTipocliente();
-        //        placa=movimentacao.getCliente().getPlaca();
-                dataentrada=movimentacao.getDataentrada();
-                datasaida=movimentacao.getDatasaida();
-                vlrtotal=movimentacao.getVlrtotal();
-                cliente=movimentacao.getCliente();
-                vaga=movimentacao.getVaga();
-            }
-        } catch (ParseException ex) {
-        }
-    }    
+	public Movimentacao() {
 
-    public void estacionar(){
-        MovimentacaoDao dao = new MovimentacaoDao();
-        VagaDAO vagadao = new VagaDAO();
-        vagadao.alterarStatusEstacionar(this.vaga.getId());
-        dao.insere(this);
-    }
-    
-    public void desestacionar(){
-        MovimentacaoDao dao = new MovimentacaoDao();
-        VagaDAO vagadao = new VagaDAO();
-        vagadao.alterarStatusDesestacionar(this.vaga.getId());
-        dao.inserirSaida(this);        
-    }
-    
-    public double calcularSaida(Date dataSaidaDate){
-        double valor = 0.0;
-        if(this.getCliente().getTipocliente().equals("A")){
+	}
 
-            Calendar dataSaidaCal = Calendar.getInstance();  
-            dataSaidaCal.setTime(dataSaidaDate);  
-            Calendar dataEntradaCal = Calendar.getInstance();  
-            dataEntradaCal.setTime(this.getDataentrada());  
+	public Movimentacao(Integer id) {
+		Movimentacao movimentacao = MovimentacaoDao.obterInstancia().buscar(id);
+		if (movimentacao.getId() > 0) {
+			id = movimentacao.getId();
+			dataentrada = movimentacao.getDataentrada();
+			datasaida = movimentacao.getDatasaida();
+			vlrtotal = movimentacao.getVlrtotal();
+			cliente = movimentacao.getCliente();
+			vaga = movimentacao.getVaga();
+		}
 
-            long diferenca = dataSaidaCal.getTimeInMillis() - dataEntradaCal.getTimeInMillis();  
-            int diferencaHoras =  1+(int)(diferenca / (60 * 60 * 1000));
+	}
 
-            valor = this.getVaga().getValorUnit() * diferencaHoras;
-        }else{
-            valor = this.getVaga().getValorUnit();                
-        }
-        return valor;
-    }
-    
-    
-    public Vaga getVaga() {
-        return vaga;
-    }
+	public Movimentacao(String pPlaca) {
+		Movimentacao movimentacao = MovimentacaoDao.obterInstancia()
+				.buscarPorPlaca(pPlaca);
+		if (movimentacao.getId() > 0) {
+			id = movimentacao.getId();
+			// placa=movimentacao.getCliente().getPlaca();
+			dataentrada = movimentacao.getDataentrada();
+			datasaida = movimentacao.getDatasaida();
+			vlrtotal = movimentacao.getVlrtotal();
+			cliente = movimentacao.getCliente();
+			vaga = movimentacao.getVaga();
+		}
+	}
 
-    public void setVaga(Vaga vaga) {
-        this.vaga = vaga;
-    }
-  
-    public Integer getId() {
-        return id;
-    }
+	public void estacionar() {
+		MovimentacaoDao dao = new MovimentacaoDao();
+		VagaDAO vagadao = new VagaDAO();
+		vagadao.alterarStatusEstacionar(this.vaga.getId());
+		dao.insere(this);
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void desestacionar() {
+		MovimentacaoDao dao = new MovimentacaoDao();
+		VagaDAO vagadao = new VagaDAO();
+		vagadao.alterarStatusDesestacionar(this.vaga.getId());
+		dao.inserirSaida(this);
+	}
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+	public double calcularSaida(Date dataSaidaDate) {
+		double valor = 0.0;
+		if (this.getCliente().getTipocliente().equals("A")) {
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-  
+			Calendar dataSaidaCal = Calendar.getInstance();
+			dataSaidaCal.setTime(dataSaidaDate);
+			Calendar dataEntradaCal = Calendar.getInstance();
+			dataEntradaCal.setTime(this.getDataentrada());
 
-    public String getTipocliente() {
-        return tipocliente;
-    }
+			long diferenca = dataSaidaCal.getTimeInMillis()
+					- dataEntradaCal.getTimeInMillis();
+			int diferencaHoras = 1 + (int) (diferenca / (60 * 60 * 1000));
 
-    public void setTipocliente(String tipocliente) {
-        this.tipocliente = tipocliente;
-    }
+			valor = this.getVaga().getValorUnit() * diferencaHoras;
+		} else {
+			valor = this.getVaga().getValorUnit();
+		}
+		return valor;
+	}
 
-  
+	public Vaga getVaga() {
+		return vaga;
+	}
 
-    public Date getDataentrada() {
-        return dataentrada;
-    }
+	public void setVaga(Vaga vaga) {
+		this.vaga = vaga;
+	}
 
-    public void setDataentrada(Date dataentrada) {
-        this.dataentrada = dataentrada;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Date getDatasaida() {
-        return datasaida;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setDatasaida(Date datasaida) {
-        this.datasaida = datasaida;
-    }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-    public Double getVlrtotal() {
-        return vlrtotal;
-    }
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}	
 
-    public void setVlrtotal(Double vlrtotal) {
-        this.vlrtotal = vlrtotal;
-    }
-  
-  
-    
-    
+	public Date getDataentrada() {
+		return dataentrada;
+	}
+
+	public void setDataentrada(Date dataentrada) {
+		this.dataentrada = dataentrada;
+	}
+
+	public Date getDatasaida() {
+		return datasaida;
+	}
+
+	public void setDatasaida(Date datasaida) {
+		this.datasaida = datasaida;
+	}
+
+	public Double getVlrtotal() {
+		return vlrtotal;
+	}
+
+	public void setVlrtotal(Double vlrtotal) {
+		this.vlrtotal = vlrtotal;
+	}
+
 }

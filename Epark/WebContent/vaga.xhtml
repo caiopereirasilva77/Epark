@@ -19,12 +19,12 @@
 				<h:panelGroup>
 					<h:inputText id="inNumeroVaga" value="#{vagaMB.vaga.numeroVaga}" />
 				</h:panelGroup>
-
-
 				<h:outputText value="Tipo da vaga:" />
 				<h:panelGroup>
-					<h:inputText id="inTipoVaga" value="#{vagaMB.vaga.tipoVaga}" />
-					<h:message for="inTipoVaga" />
+					<h:selectOneRadio value="#{vagaMB.vaga.tipoVaga}">
+						<f:selectItem itemValue="Mensalista" itemLabel="Mensalista" />
+						<f:selectItem itemValue="Avulso" itemLabel="Avulso" />
+					</h:selectOneRadio>					
 				</h:panelGroup>
 				<h:outputText value="Valor:" />
 				<h:panelGroup>
@@ -32,12 +32,7 @@
 						required="true" requiredMessage="Valor Obrigatório" />
 					<h:message for="inValor" />
 				</h:panelGroup>
-				<h:outputText value="Valor (tipo):" />
-				<h:selectOneRadio value="#{vagaMB.vaga.tipoValor}">
-					<f:selectItem itemValue="Mensal" itemLabel="Mensal" />
-					<f:selectItem itemValue="Hora" itemLabel="Hora/Fração" />
-				</h:selectOneRadio>
-
+				
 				<h:panelGroup></h:panelGroup>
 				<h:selectOneRadio value="#{vagaMB.vaga.status}">
 					<f:selectItem itemValue="0" itemLabel="Livre" />
@@ -52,43 +47,32 @@
 
 			<br />
 
-			<p:dataTable value="#{vagaMB.vagas}" var="vga"
-			paginator="true" rowsPerPageTemplate="2,5,10">
-			
+			<p:dataTable value="#{vagaMB.vagas}" var="vga">
 				<p:column>
-					<f:facet name="header">#ID</f:facet>
-					#{vga.id}
-				</p:column>
+					<f:facet name="header">#ID</f:facet>#{vga.id}
+					</p:column>
 				<p:column>
-					<f:facet name="header">Numero Vaga</f:facet>
-					#{vga.numeroVaga}
-				</p:column>
+					<f:facet name="header">Nº Vaga</f:facet>#{vga.numeroVaga}
+					</p:column>
 				<p:column>
-					<f:facet name="header">Tipo Vaga</f:facet>
-					#{vga.tipoVaga}
-				</p:column>
+					<f:facet name="header">Tipo</f:facet>#{vga.tipoVaga}
+					</p:column>
 				<p:column>
-					<f:facet name="header">Tipo Valor</f:facet>
-					#{vga.tipoValor}
-				</p:column>
+					<f:facet name="header">Tipo Cobrança</f:facet>#{vga.tipoValor}
+					</p:column>
 				<p:column>
-					<f:facet name="header">Valor unit.</f:facet>
-					#{vga.valorUnit}
-				</p:column>
+					<f:facet name="header">Valor</f:facet>#{vga.valorUnit}
+					</p:column>
 				<p:column>
-				<f:facet name="header">Status</f:facet>
-					#{vga.status}
-				</p:column>
+					<f:facet name="header">Status</f:facet>#{vga.status}
+					</p:column>
 				<p:column>
-				
-				
 					<p:commandButton   value="Editar" styleClass="btn"  process="@this" update="@form">
-      					<f:setPropertyActionListener value="#{vga}"
-      						 target="#{vagaMB.vaga}" />
-   					  </p:commandButton>
-	
-					<p:commandButton action="#{vagaMB.excluir}" value="Excluir"
-						styleClass="btn" process="@this" update="@form">
+
+						<f:setPropertyActionListener value="#{vga}"
+							target="#{vagaMB.vaga}" />
+					</p:commandButton>
+					<p:commandButton  action="#{vagaMB.excluir}" value="Excluir" styleClass="btn" process="@this" update="@form">
 						<f:setPropertyActionListener value="#{vga}"
 							target="#{vagaMB.vaga}" />
 					</p:commandButton>

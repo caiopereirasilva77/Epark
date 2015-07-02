@@ -1,129 +1,90 @@
 package br.senai.sc.mb;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
-
-import br.senai.sc.controller.MovimentacaoController;
 import br.senai.sc.dao.ClienteDao;
 import br.senai.sc.dao.MovimentacaoDao;
+import br.senai.sc.dao.VagaDAO;
 import br.senai.sc.model.Cliente;
 import br.senai.sc.model.Movimentacao;
 
-
 @ManagedBean
 public class MovimentacaoMB {
-		private Cliente cliente;
-		private Movimentacao movimentacao;
-		private List<Movimentacao> entradas;
-		private List<Movimentacao> saidas;
-		private MovimentacaoDao movDAO = MovimentacaoDao.obterInstancia();
-	    private static MovimentacaoMB instanciaRep;
-	    
-	    
-	    public static MovimentacaoMB obterInstancia() {
-	        if ( instanciaRep == null ) {
-	            instanciaRep = new MovimentacaoMB();
-	        }
-	        return instanciaRep;
-	    }
+	private List<Movimentacao> movimentacoes;
+	private MovimentacaoDao movimentacaoDAO;
+	private ClienteDao clienteDAO;
+	private VagaDAO vagaDAO;
+	private Movimentacao movimentacao;
+	private String consultaPlaca;
 
 	@PostConstruct
-	private void init(){
-		
+	private void init() {
+		consultaPlaca = "";
 		movimentacao = new Movimentacao();
-		entradas = new ArrayList<Movimentacao>();
-		saidas = new ArrayList<Movimentacao>();
-		entradas = movDAO.buscarEntradas();
-		saidas = movDAO.buscarSaidas();
-	//	cliente = new Cliente();
-		
+		movimentacaoDAO = MovimentacaoDao.obterInstancia();
+		clienteDAO = ClienteDao.obterInstancia();
+		vagaDAO = vagaDAO.obterInstancia();
+		movimentacoes = movimentacaoDAO.listarTodos();
 	}
 
+	public String consultarPlaca() throws ParseException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		movimentacao.setCliente(clienteDAO.burcarPorPlaca(consultaPlaca));
 
-	
-	    public String consultarClienteMovimentacao(String pPlaca) throws ParseException{
-	         Cliente cliente = new Cliente(pPlaca);
-	    //   if ( cliente.getPlaca().isEmpty() ){
-	    //       throw new Exception("Placa inválida");
-	    //   }
-	       
-	        if(cliente.getId() != null){
-	             if(cliente.estaestacionado()){
-	            	 saidas = movDAO.buscarSaidas();
-	                 return "Clienteestacionado";
-	             }else{
-	            	 entradas = movDAO.buscarEntradas();
-	                 return "Clientenaoestacionado";
-	                 
-	             }
-	        }else{
-	            return "Clientenaoexiste";
-	        }
-	   }
-	    
-	    
-	    public void estacionar(Movimentacao movimentacao) {
-	    	
-	    	if (movimentacao.getId()>0) {
-	    		  movimentacao.estacionar();
-			}else{
-				movimentacao.desestacionar();
+		if (movimentacao.getCliente().getId() == null) {
+			context.addMessage("", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Cliente não cadastrado!", ""));
+			return "";
+		} else {
+			Movimentacao verMov = new Movimentacao();
+			verMov = movimentacaoDAO.verStatusCliente(movimentacao.getCliente().getId());
+			if (verMov.getDatasaida() == null) {				
+				return "sairVaga.jsf";
+			} else {
+				return "estacionar.jsf";
 			}
-	      
-	        
-	        
-	    }
-	    public void desestacionar(Movimentacao movimentacao) throws Exception{
-	        movimentacao.desestacionar();
-	    }
-
-		public Cliente getCliente() {
-			return cliente;
 		}
+	}
 
-		public void setCliente(Cliente cliente) {
-			this.cliente = cliente;
+	public void estacionar(Movimentacao movimentacao) {
+		if (movimentacao.getId() > 0) {
+			movimentacao.estacionar();
+		} else {
+			movimentacao.desestacionar();
 		}
+	}
 
-		public Movimentacao getMovimentacao() {
-			return movimentacao;
-		}
+	public void sairVaga(Movimentacao movimentacao) throws Exception {
+		movimentacao.desestacionar();
+	}
 
-		public void setMovimentacao(Movimentacao movimentacao) {
-			this.movimentacao = movimentacao;
-		}
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
 
-		public List<Movimentacao> getEntradas() {
-			return entradas;
-		}
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
+	}
 
-		public void setEntradas(List<Movimentacao> entradas) {
-			this.entradas = entradas;
-		}
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
 
-		public List<Movimentacao> getSaidas() {
-			return saidas;
-		}
+	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
 
-		public void setSaidas(List<Movimentacao> saidas) {
-			this.saidas = saidas;
-		}
+	public String getConsultaPlaca() {
+		return consultaPlaca;
+	}
 
-		public MovimentacaoDao getMovDAO() {
-			return movDAO;
-		}
-
-		public void setMovDAO(MovimentacaoDao movDAO) {
-			this.movDAO = movDAO;
-		}
-
-	
-
+	public void setConsultaPlaca(String consultaPlaca) {
+		this.consultaPlaca = consultaPlaca;
+	}
 }
